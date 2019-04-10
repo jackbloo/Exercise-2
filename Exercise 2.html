@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Calculator </title>
+        <link rel="stylesheet" href="Exercise 2.css">
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Muli|Poppins|Roboto+Mono" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+        <script>
+        alert("Enjoy the Calculator!")
+        </script>
+    </head>
+    <body>
+            <nav class="navbar navbar-default">
+                    <div class="container">
+                           <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-nav-demo" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                      </button>
+                            <a href="#" class="navbar-brand" id="rocket"> <i class="fas fa-rocket"></i> IQBAL</a>
+                        </div>
+                        <div class="collapse navbar-collapse" id="bs-nav-demo">
+                            <ul class="nav navbar-nav">
+                                <li class="active"><a href="#">Calculator</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                <div class= "java-cal">
+                <h1>Calculator</h1>
+                
+                <div id="calculator" class="calculator">
+                
+                <div id="viewer" class="viewer">0</div>
+
+                <table class= halo>
+                <tr>
+                <td><button id="clear" class="clear">C</button></td>
+                <td><button data-ops="plus" class="ops">+</button></td>
+                <td><button data-ops="minus" class="ops">-</button></td>
+                <td><button data-ops="times" class="ops">*</button></td>
+    
+                </tr>
+                <tr>
+                <td><button class="num" data-num="7">7</button></td>
+                <td><button class="num" data-num="8">8</button></td>
+                <td><button class="num" data-num="9">9</button></td>
+                <td><button data-ops="divided by" class="ops">/</button></td>
+                </tr>
+                <tr>
+                <td><button class="num" data-num="4">4</button></td>
+                <td><button class="num" data-num="5">5</button></td>
+                <td><button class="num" data-num="6">6</button></td>
+                <td rowspan="10"><button id="equals" class="equals" data-result="">=</button></td>
+                
+                </tr>
+                <tr>
+                <td><button class="num" data-num="1">1</button></td>
+                <td><button class="num" data-num="2">2</button></td>
+                <td><button class="num" data-num="3">3</button></td>
+
+                
+                </tr>
+                <tr>
+                <td colspan="2"><button class="num" style="width:100px" data-num="0">0</button></td>
+                <td><button class="num" data-num=".">.</button></td>
+                  </tr>
+            </table>
+             </div>
+            </div>
+             <script>
+                
+
+
+            (function() {
+            "use strict";
+
+            var el = function(element) {
+                if (element.charAt(0) === "#") { 
+                return document.querySelector(element);
+                }
+
+                return document.querySelectorAll(element); 
+            };
+
+          
+            var viewer = el("#viewer"), 
+                equals = el("#equals"), 
+                nums = el(".num"), 
+                ops = el(".ops"), 
+                theNum = "", 
+                oldNum = "", 
+                resultNum, 
+                operator; 
+
+            
+            var setNum = function() {
+                if (resultNum) { 
+                theNum = this.getAttribute("data-num");
+                resultNum = "";
+                } else { 
+                theNum += this.getAttribute("data-num");
+                }
+
+                viewer.innerHTML = theNum; 
+
+            };
+
+           
+            var moveNum = function() {
+                oldNum = theNum;
+                theNum = "";
+                operator = this.getAttribute("data-ops");
+
+                equals.setAttribute("data-result", ""); 
+            };
+
+            
+            var displayNum = function() {
+
+               
+                oldNum = parseFloat(oldNum);
+                theNum = parseFloat(theNum);
+
+            
+                switch (operator) {
+                case "plus":
+                    resultNum = oldNum + theNum;
+                    break;
+
+                case "minus":
+                    resultNum = oldNum - theNum;
+                    break;
+
+                case "times":
+                    resultNum = oldNum * theNum;
+                    break;
+
+                case "divided by":
+                    resultNum = oldNum / theNum;
+                    break;
+
+                default:
+                    resultNum = theNum;
+                }
+
+
+                
+                viewer.innerHTML = resultNum;
+                equals.setAttribute("data-result", resultNum);
+
+                
+                oldNum = 0;
+                theNum = resultNum;
+
+            };
+
+           
+            var clearAll = function() {
+                oldNum = "";
+                theNum = "";
+                viewer.innerHTML = "0";
+                equals.setAttribute("data-result", resultNum);
+            };
+
+
+            for (var i = 0, l = nums.length; i < l; i++) {
+                nums[i].onclick = setNum;
+            }
+
+           
+            for (var i = 0, l = ops.length; i < l; i++) {
+                ops[i].onclick = moveNum;
+            }
+
+           
+            equals.onclick = displayNum;
+
+            el("#clear").onclick = clearAll;
+
+
+            }());
+</script>
+             
+             </script>
+        <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    </body>
+  
+</html>
